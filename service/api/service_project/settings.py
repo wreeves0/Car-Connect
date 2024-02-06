@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'service_rest.apps.ServiceRestConfig'
 ]
 
 MIDDLEWARE = [
@@ -49,7 +50,9 @@ MIDDLEWARE = [
 
 ALLOWED_HOSTS = [
     "localhost",
+    "project-beta-inventory-api-1",
 ]
+
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
