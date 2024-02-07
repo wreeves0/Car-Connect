@@ -38,7 +38,10 @@ class AppointmentListEncoder(ModelEncoder):
     ]
 
     def get_extra_data(self, o):
-        return {"technician": o.technician.employee_id}
+        return {
+            "technician": o.technician.employee_id,
+            "date_time": o.date_time.isoformat() if o.date_time else None
+        }
 
 
 class AppointmentDetailEncoder(ModelEncoder):

@@ -16,7 +16,7 @@ class AutomobileVO(models.Model):
 
 
 class Appointment(models.Model):
-    date_time = models.DateTimeField()
+    date_time = models.DateTimeField(null=True)
     reason = models.CharField(max_length=200)
     STATUS_CHOICES = [
         ('created', 'Created'),
