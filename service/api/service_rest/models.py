@@ -6,7 +6,7 @@ from django.db import models
 class Technician(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    employee_id = models.PositiveSmallIntegerField(null=True)
+    employee_id = models.PositiveSmallIntegerField(null=True, unique=True)
 
 
 class AutomobileVO(models.Model):
