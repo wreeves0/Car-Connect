@@ -68,10 +68,10 @@ def api_technician_list(request):
     else:
         content = json.loads(request.body)
         technician = Technician.objects.create(**content)
-        technician_data = TechnicianDetailEncoder().default(technician)
+        technician_data = TechnicianListEncoder().default(technician)
         return JsonResponse(
             technician_data,
-            encoder=TechnicianDetailEncoder
+            encoder=TechnicianListEncoder
         )
 
 

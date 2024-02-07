@@ -16,11 +16,26 @@ function Nav() {
                 <li className="nav-item">
                 <NavLink className="nav-link" to="/salespersonform">Add a Salesperson</NavLink>
                 </li>
+                <li className="nav-item">
+              <NavLink className="nav-link" to="/technicians/">Technicians</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/technicians/create">Add a Technician</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/appointments/">Service Appointments</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/manufacturers/">Manufacturers</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/models/">Models</NavLink>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
-  )
+  );
 }
 
 export default Nav;
