@@ -13,7 +13,6 @@ function SalesForm() {
     const [automobiles, setAutomobiles] = useState([]);
 
     useEffect(() => {
-        // Fetch data for dropdowns from the backend
         const fetchData = async () => {
             try {
                 const salespersonsResponse = await fetch('http://localhost:8090/api/salespeople/');
@@ -42,11 +41,8 @@ function SalesForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         console.log("Submit form data", formData);
-
         const url = 'http://localhost:8090/api/sales/';
-
         const fetchConfig = {
             method: "POST",
             body: JSON.stringify(formData),
@@ -54,13 +50,12 @@ function SalesForm() {
                 'Content-Type': 'application/json',
             },
         };
-
         try {
             const response = await fetch(url, fetchConfig);
             if (response.ok) {
-                // Sale created successfully, now update automobile sold status
                 await updateAutomobileSoldStatus(formData.automobile_id);
-                // Reset form data
+                const updatedAutomobiles = automobiles.filter(auto => auto.id.toString() !== formData.automobile_id);
+                setAutomobiles(updatedAutomobiles);
                 setFormData({
                     automobile_id: '',
                     salesperson_id: '',
@@ -85,7 +80,6 @@ function SalesForm() {
             }
         } catch (error) {
             console.error('Error updating automobile sold status:', error);
-
         }
     };
 
