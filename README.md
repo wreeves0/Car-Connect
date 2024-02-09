@@ -15,11 +15,10 @@ Inventory
 Services
 Sales
 
-![Alt text](<design_image.png>)
 
 ## Diagram
 
-HOW DO YOU PUT A PICTURE IN HERE?
+![Alt text](<design_image.png>)
 
 ## Inventory microservice
 
