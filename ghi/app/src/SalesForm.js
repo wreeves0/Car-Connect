@@ -82,11 +82,10 @@ function SalesForm() {
             const response = await fetch(updateUrl, { method: 'PUT' });
             if (!response.ok) {
                 console.error('Failed to update automobile sold status:', response.statusText);
-                // Optionally handle error here
             }
         } catch (error) {
             console.error('Error updating automobile sold status:', error);
-            // Optionally handle error here
+
         }
     };
 

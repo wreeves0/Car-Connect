@@ -53,8 +53,19 @@ AutomobileVO Model includes: vin, sold, import_href
 
 ## Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+The sales microservice is responsible for managing sales-related data and interactions. It consists of various models including AutomobileVO, Customer, SalesPerson, and SalesRecord, each serving a specific purpose in the sales process.
+
+AutomobileVO
+AutomobileVO acts as a value object that retrieves information about available automobiles from the inventory microservice. This data is continuously updated through a polling mechanism, ensuring that the sales microservice always has the latest inventory information.
+
+Customer
+Customers represent individuals interested in purchasing vehicles. The sales microservice provides endpoints for creating new customers, listing all existing customers, and retrieving details of specific customers.
+
+SalesPerson
+SalesPerson represents individuals responsible for facilitating vehicle sales. The microservice offers functionalities for creating new salespeople, listing all salespeople, retrieving details of specific salespeople, and deleting salespeople if needed.
+
+SalesRecord
+SalesRecord captures details of each sale transaction, including the vehicle sold, the customer purchasing the vehicle, and the salesperson involved in the sale. This model serves as the central entity within the sales microservice, linking all other models together.
 
 ## How to Run This App
 
@@ -169,12 +180,147 @@ URL Parameters: pk (integer) - The ID of the technician
 Success Response: Shows the technician's details
 
 
-
-
-Sales API
-
 ## Value Objects
 
 AutomobileVO: This VO gets data from the inventory using a poller that polls data every 60 seconds for both the service microservice and sales microservice.
 
-The service microservice polls the VIP status from inventory to show whether a vihicle has been purched through the CarCar sales feature when they have an appointment.
+The service microservice polls the VIP status from inventory to show whether a vehicle has been purchased through the CarCar sales feature when they have an appointment.
+
+
+
+
+---
+
+## Sales API
+
+---
+
+### Customers
+
+List Customers
+Method: GET
+URL: http://localhost:8090/api/customers/
+Description: Retrieves a list of all customers.
+
+Create a Customer
+Method: POST
+URL: http://localhost:8090/api/customers/
+Description: Creates a new customer.
+
+Show a Specific Customer
+Method: GET
+URL: http://localhost:8090/api/customers/{id}/
+Description: Retrieves details of a specific customer identified by the {id} parameter.
+
+---
+
+### Salespeople
+
+List Salespeople
+Method: GET
+URL: http://localhost:8090/api/salespeople/
+Description: Retrieves a list of all salespeople.
+
+Salesperson Details
+Method: GET
+URL: http://localhost:8090/api/salesperson/{id}/
+Description: Retrieves details of a specific salesperson identified by the {id} parameter.
+
+Create a Salesperson
+Method: POST
+URL: http://localhost:8090/api/salespeople/
+Description: Creates a new salesperson.
+
+Delete a Salesperson
+Method: DELETE
+URL: http://localhost:8090/api/salesperson/{id}/
+Description: Deletes a salesperson identified by the {id} parameter.
+
+---
+
+### Sales Records
+
+List All Sales Records
+Method: GET
+URL: http://localhost:8090/api/sales/
+Description: Retrieves a list of all sales records.
+
+Create a New Sale
+Method: POST
+URL: http://localhost:8090/api/sales/
+Description: Creates a new sale record.
+
+Show a Salesperson's Sales Records
+Method: GET
+URL: http://localhost:8090/api/sales/{id}/
+Description: Retrieves sales records associated with a specific salesperson identified by the {id} parameter.
+
+---
+
+### Sample Salesperson Data Template
+
+To create a new salesperson, you need to provide the following information:
+
+```json
+{
+	"first_name": "Tim",
+	"last_name": "Ross",
+	"employee_id": "FNHY",
+	"id": 1
+}
+Required Fields:
+
+First Name: The first name of the salesperson.
+Last Name: The last name of the salesperson.
+Employee ID: The unique identifier for the salesperson.
+
+---
+
+### Sample Customer Data Template
+To create a new customer, you need to provide the following information:
+{
+	"first_name": "Bob",
+	"last_name": "Ross",
+	"address": "Test St",
+	"phone_number": "980-349-6075",
+	"id": 1
+}
+Required Fields:
+
+First Name: The first name of the customer.
+Last Name: The last name of the customer.
+Address: The address of the customer.
+Phone Number: The phone number of the customer.
+
+---
+
+### Sample Sale Data Template
+To create a new sale, you need to provide the following information:
+
+json
+Copy code
+{
+	"price": 2,
+	"automobile": {
+		"vin": "ASDACZX",
+		"sold": true
+	},
+	"salesperson": {
+		"first_name": "Tim",
+		"last_name": "Ross",
+		"employee_id": "FNHY",
+		"id": 1
+	},
+	"customer": {
+		"first_name": "Bob",
+		"last_name": "Ross",
+		"id": 1
+	},
+	"id": 1
+}
+Required Fields:
+
+Price: The price of the sale.
+Automobile VIN: The  unique identifier of the automobile being sold.
+Salesperson ID: The unique identifier of the salesperson involved in the sale.
+Customer ID: The unique identifier of the customer making the purchase.
