@@ -270,9 +270,9 @@ To create a new salesperson, you need to provide the following information:
 ~~~
 Required Fields:
 
--First Name: The first name of the salesperson.
--Last Name: The last name of the salesperson.
--Employee ID: The unique identifier for the salesperson.
+1. First Name: The first name of the salesperson.
+2. Last Name: The last name of the salesperson.
+3. Employee ID: The unique identifier for the salesperson.
 
 
 
@@ -289,10 +289,10 @@ To create a new customer, you need to provide the following information:
 ~~~
 Required Fields:
 
--First Name: The first name of the customer.
--Last Name: The last name of the customer.
--Address: The address of the customer.
--Phone Number: The phone number of the customer.
+1. First Name: The first name of the customer.
+2. Last Name: The last name of the customer.
+3. Address: The address of the customer.
+4. Phone Number: The phone number of the customer.
 
 ---
 
@@ -322,7 +322,7 @@ To create a new sale, you need to provide the following information:
 ~~~
 Required Fields:
 
--Price: The price of the sale.
--Automobile VIN: The  unique identifier of the automobile being sold.
--Salesperson ID: The unique identifier of the salesperson involved in the sale.
--Customer ID: The unique identifier of the customer making the purchase.
+1. Price: The price of the sale.
+2. Automobile VIN: The  unique identifier of the automobile being sold.
+3. Salesperson ID: The unique identifier of the salesperson involved in the sale.
+4. Customer ID: The unique identifier of the customer making the purchase.
