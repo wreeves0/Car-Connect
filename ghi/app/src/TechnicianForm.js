@@ -16,7 +16,7 @@ function TechnicianForm() {
 
         const technicianUrl = 'http://localhost:8080/api/technicians/';
         const fetchOptions = {
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json',
@@ -54,7 +54,6 @@ function TechnicianForm() {
         setEmployee_Id(value);
     };
 
-    // Define spinnerClasses
     const spinnerClasses = "d-flex justify-content-center mb-3";
 
     let messageClasses = "alert alert-success d-none mb-0";
