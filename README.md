@@ -262,29 +262,29 @@ Description: Retrieves sales records associated with a specific salesperson iden
 To create a new salesperson, you need to provide the following information:
 
 ```json
-{
-	"first_name": "Tim",
-	"last_name": "Ross",
-	"employee_id": "FNHY",
-	"id": 1
-}
+// {
+// 	"first_name": "Tim",
+// 	"last_name": "Ross",
+// 	"employee_id": "FNHY",
+// 	"id": 1
+// }
 Required Fields:
 
 First Name: The first name of the salesperson.
 Last Name: The last name of the salesperson.
 Employee ID: The unique identifier for the salesperson.
 
----
+
 
 ### Sample Customer Data Template
 To create a new customer, you need to provide the following information:
-{
-	"first_name": "Bob",
-	"last_name": "Ross",
-	"address": "Test St",
-	"phone_number": "980-349-6075",
-	"id": 1
-}
+// {
+// 	"first_name": "Bob",
+// 	"last_name": "Ross",
+// 	"address": "Test St",
+// 	"phone_number": "980-349-6075",
+// 	"id": 1
+// }
 Required Fields:
 
 First Name: The first name of the customer.
@@ -297,27 +297,25 @@ Phone Number: The phone number of the customer.
 ### Sample Sale Data Template
 To create a new sale, you need to provide the following information:
 
-json
-Copy code
-{
-	"price": 2,
-	"automobile": {
-		"vin": "ASDACZX",
-		"sold": true
-	},
-	"salesperson": {
-		"first_name": "Tim",
-		"last_name": "Ross",
-		"employee_id": "FNHY",
-		"id": 1
-	},
-	"customer": {
-		"first_name": "Bob",
-		"last_name": "Ross",
-		"id": 1
-	},
-	"id": 1
-}
+// {
+// 	"price": 2,
+// 	"automobile": {
+// 		"vin": "ASDACZX",
+// 		"sold": true
+// 	},
+// 	"salesperson": {
+// 		"first_name": "Tim",
+// 		"last_name": "Ross",
+// 		"employee_id": "FNHY",
+// 		"id": 1
+// 	},
+// 	"customer": {
+// 		"first_name": "Bob",
+// 		"last_name": "Ross",
+// 		"id": 1
+// 	},
+// 	"id": 1
+// }
 Required Fields:
 
 Price: The price of the sale.
