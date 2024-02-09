@@ -121,7 +121,7 @@ def api_appointment_list(request):
     else:
         try:
             content = json.loads(request.body)
-            technician = Technician.objects.get(id=content["technician"])
+            technician = Technician.objects.get(employee_id=content["technician"])
             content["technician"] = technician
             appointment = Appointment.objects.create(**content)
             return JsonResponse(
@@ -148,19 +148,11 @@ def api_appointment_detail(request, pk):
             )
         elif request.method == "PUT":
             content = json.loads(request.body)
-            technician = Technician.objects.get(id=content["technician"])
+            technician = Technician.objects.get(employee_id=content["technician"])
             content["technician"] = technician
 
             appointment.date_time = content["date_time"]
             appointment.reason = content["reason"]
-            new_status = content.get("status")
-            if new_status in ['cancelled', 'finished']:
-                appointment.status = new_status
-            else:
-                return JsonResponse(
-                    {"message": "Invalid status"},
-                    status=400,
-                )
             appointment.vin = content["vin"]
             appointment.customer = content["customer"]
 
@@ -174,6 +166,50 @@ def api_appointment_detail(request, pk):
         elif request.method == "DELETE":
             count, _ = Appointment.objects.filter(id=pk).delete()
             return JsonResponse({"deleted": count > 0})
+    except Appointment.DoesNotExist:
+        return JsonResponse(
+            {"message": "Appointment not found"},
+            status=404,
+        )
+
+
+@require_http_methods(["POST"])
+def api_appointment_cancel(request, pk):
+    """
+    Sets an appointment's status to 'canceled'.
+    """
+    try:
+        appointment = Appointment.objects.get(id=pk)
+        appointment.status = 'canceled'
+        appointment.save()
+
+        return JsonResponse(
+            {"message": "Appointment canceled successfully"},
+            status=200,
+        )
+
+    except Appointment.DoesNotExist:
+        return JsonResponse(
+            {"message": "Appointment not found"},
+            status=404,
+        )
+
+
+@require_http_methods(["POST"])
+def api_appointment_finish(request, pk):
+    """
+    Sets an appointment's status to 'finished'.
+    """
+    try:
+        appointment = Appointment.objects.get(id=pk)
+        appointment.status = 'finished'
+        appointment.save()
+
+        return JsonResponse(
+            {"message": "Appointment marked as finished successfully"},
+            status=200,
+        )
+
     except Appointment.DoesNotExist:
         return JsonResponse(
             {"message": "Appointment not found"},

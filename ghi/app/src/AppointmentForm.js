@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 function AppointmentForm() {
     const [vin, setVin] = useState('');
     const [customer, setCustomer] = useState('');
-    const [date, setDate] = useState('');
-    const [time, SetTime] = useState('');
+    const [date_time, setDate_Time] = useState('');
     const [technician, setTechnician] = useState("");
     const [technicians, setTechnicians] = useState([]);
     const [reason, setReason] = useState('');
@@ -15,7 +14,6 @@ function AppointmentForm() {
         const response = await fetch(url);
         if (response.ok) {
         const data = await response.json();
-        console.log("Technicians data:", data);
         setTechnicians(data.technicians);
         }
     };
@@ -26,11 +24,12 @@ function AppointmentForm() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+
         const data = {};
         data.vin = vin;
         data.customer = customer;
-        data.date = date;
-        data.time = time;
+        data.date_time = date_time;
         data.technician = technician;
         data.reason = reason;
 
@@ -50,8 +49,7 @@ function AppointmentForm() {
         if (appointmentResponse.ok) {
             setVin("");
             setCustomer("");
-            setDate("");
-            setTime("");
+            setDate_Time("");
             setTechnician([]);
             setReason("");
             setHasCreatedAppointment(true);
@@ -73,14 +71,20 @@ function AppointmentForm() {
         setCustomer(value);
     };
 
-    const handleChangeDate = (event) => {
-        const value = event.target.value;
-        setDate(value);
-    };
+    const handleChangeDateOrTime = (event) => {
+        const { name, value } = event.target;
+        let [date, time] = date_time.split('T');
 
-    const handleChangeTime = (event) => {
-        const value = event.target.value;
-        setTime(value);
+        if (name === "date") {
+            date = value;
+        } else if (name === "time") {
+            time = value;
+        }
+
+        // Ensure time has value before concatenating to match ISO format
+        const newDateTime = date + (time ? `T${time}:00` : '');
+        setDate_Time(newDateTime);
+
     };
 
     const handleChangeTechnician = (event) => {
@@ -150,12 +154,13 @@ function AppointmentForm() {
                     <div className="form-floating mb-3">
                         <label htmlFor="date_time">Date:</label>
                         <input
-                        onChange={handleChangeDate}
-                        required
-                        type="date"
-                        id="date"
-                        name="date"
-                        className="form-control"
+                            onChange={handleChangeDateOrTime}
+                            value={date_time.split('T')[0]} // Extract date part for the value
+                            required
+                            type="date"
+                            id="date"
+                            name="date"
+                            className="form-control"
                         />
                     </div>
                     </div>
@@ -163,12 +168,13 @@ function AppointmentForm() {
                     <div className="form-floating mb-3">
                         <label htmlFor="date_time">Time:</label>
                         <input
-                        onChange={handleChangeTime}
-                        required
-                        type="time"
-                        id="time"
-                        name="time"
-                        className="form-control"
+                            onChange={handleChangeDateOrTime}
+                            value={date_time.split('T')[1] ? date_time.split('T')[1].slice(0,5) : ''}
+                            required
+                            type="time"
+                            id="time"
+                            name="time"
+                            className="form-control"
                         />
                     </div>
                     </div>
@@ -185,10 +191,10 @@ function AppointmentForm() {
                         {technicians.map(technician => {
                         return(
                             <option
-                            key={technician.id}
-                            value={technician.id}
+                            key={technician.employee_id}
+                            value={technician.employee_id}
                             >
-                            {technician.first_name}
+                            {technician.employee_id}
                             </option>
                         )
                         })}
