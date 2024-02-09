@@ -15,6 +15,8 @@ Inventory
 Services
 Sales
 
+![Alt text](<design_image.pngpng>)
+
 ## Diagram
 
 HOW DO YOU PUT A PICTURE IN HERE?
