@@ -19,6 +19,20 @@ Sales
 
 HOW DO YOU PUT A PICTURE IN HERE?
 
+## Inventory microservice
+
+The inventory microservice shows manufacturers, vehicle models, and automobiles associated with the business CarCar. It provides a way to view a list of manufacturers and create a new one. The vehicle and automobile portion of the app similarly provide a way to view a list of vehicles and automobiles and forms for each to create a new instance of vehicle and automobile.
+
+Models included:
+
+Manufacturer, VehicleModel, and Automobile
+
+Manufacturer Model includes: name
+
+VehicleModel includes: name, picture_url, and a ForeignKey manufacturer to the Manufacturer model
+
+Automobile includes: color, year, vin, sold (a BooleanField with a default set to False), and a ForeignKey model to the Model model
+
 ## Service microservice
 
 Explain your models and integration with the inventory
@@ -31,7 +45,8 @@ Models included:
 Technician, Appointment, and AutomobileVO
 
 Technician Model includes: first_name, last_name, and employee_id
-Appointment Model includes: date_time, reason, status(inlcuding a dictionary of possible choices that can be assigned to an appointment), vin, customer, and a ForeignKey to the Technician Model
+
+Appointment Model includes: date_time, reason, status(inlcuding a dictionary of possible choices that can be assigned to an appointment), vin, customer, and a ForeignKey technician to the Technician model
 
 AutomobileVO Model includes: vin, sold, import_href
 
@@ -52,22 +67,75 @@ You need to have Docker, Git, and Node.js 18.2 or above
 
 ## API Documentation
 
+Inventory API
+
+---Automobiles---
+
+List All Automobiles
+URL: /automobiles/
+Method: GET
+Description: Shows a list of all automobiles in the database
+Success Response: Returns a list of automobile objects
+
+Get Automobile Details
+URL: /automobiles/<str:vin>/
+Method: GET
+Description: Shows detailed information for a specific automobile identified by its VIN
+URL Parameters: vin (string) - The VIN of the automobile
+Success Response: Shows the automobile's details
+
+---Manufacturers---
+
+List All Manufacturers
+URL: /manufacturers/
+Method: GET
+Description: Shows a list of all vehicle manufacturers
+Success Response: Returns a JSON array of manufacturer objects
+
+Get Manufacturer Details
+URL: /manufacturers/<int:pk>/
+Method: GET
+Description: Shows detailed information for a specific manufacturer by its ID
+URL Parameters: pk (integer) - The ID of the manufacturer
+Success Response: Shows the manufacturer's details
+
+
+
+---Vehicle Models---
+
+List All Vehicle Models
+URL: /models/
+Method: GET
+Description: Shows a list of all vehicle models
+Success Response: Returns a JSON array of vehicle model objects
+
+Get Vehicle Model Details
+URL: /models/<int:pk>/
+Method: GET
+Description: Shows detailed information for a specific vehicle model by its ID
+URL Parameters: pk (integer) - The ID of the vehicle model
+Success Response: Shows the vehicle model's details
+____________________
+
+
+
+
 Services API
 
-Appointments
+---Appointments---
 
 List All Appointments
 URL: /appointments/
 Method: GET
 Description: Retrieve a list of all appointments
-Success Response: A list of appointments
+Success Response: Returns a list of appointments
 
 Get Appointment Details
 URL: /appointments/<int:pk>/
 Method: GET
 Description: Retrieve details of a specific appointment by its ID (pk)
 URL Parameters: pk (integer) - The ID of the appointment
-Success Response: The appointment's details
+Success Response: Shows the appointment's details
 
 Cancel Appointment
 URL: /appointments/<int:pk>/cancel/
@@ -84,20 +152,20 @@ Description: Mark a specific appointment by its ID (pk) as finished
 URL Parameters: pk (integer) - The ID of the appointment to mark as finished
 Success Response: Confirmation that the appointment has been marked as finished
 
-Technicians
+---Technicians---
 
 List All Technicians
 URL: /technicians/
 Method: GET
 Description: Retrieve a list of all technicians
-Success Response: A list of technicians
+Success Response: Returns a list of technicians
 
 Get Technician Details
 URL: /technicians/<int:pk>/
 Method: GET
 Description: Retrieve details of a specific technician by their ID (pk)
 URL Parameters: pk (integer) - The ID of the technician
-Success Response: The technician's details
+Success Response: Shows the technician's details
 
 
 
