@@ -15,7 +15,7 @@ Inventory
 Services
 Sales
 
-![Alt text](<design_image.pngpng>)
+![Alt text](<design_image.png>)
 
 ## Diagram
 
